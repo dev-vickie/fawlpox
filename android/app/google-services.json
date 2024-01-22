@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "204575361740",
+    "project_id": "fowlpoxd",
+    "storage_bucket": "fowlpoxd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204575361740:android:207e06c219f231d6925069",
+        "android_client_info": {
+          "package_name": "com.example.fawlpox"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtsEYn3N0ha76oGV7FDy15bMf1QiVwswY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
