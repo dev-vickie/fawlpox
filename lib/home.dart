@@ -54,7 +54,7 @@ class HomePage extends ConsumerWidget {
             ),
 
             ListTile(
-              title: const Text("History"),
+              title: const Text("Information"),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(
