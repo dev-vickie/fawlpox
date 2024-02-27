@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Unhealthy extends ConsumerStatefulWidget {
   final File file;
-  const Unhealthy({super.key,required this.file});
+  const Unhealthy({super.key, required this.file});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _UnhealthyState();
@@ -31,8 +31,21 @@ class _UnhealthyState extends ConsumerState<Unhealthy> {
               height: 300,
               width: 300,
             ),
-
+            const SizedBox(
+              height: 20,
+            ),
             const Text("Unhealthy"),
+            const SizedBox(
+              height: 8,
+            ),
+            const Text(
+              "Fowl presence detected. It is recommended to isolate the affected bird from the flock and administer antibiotics to the remaining birds. Additionally, contact a local veterinary for further assistance",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -42,7 +55,6 @@ class _UnhealthyState extends ConsumerState<Unhealthy> {
               },
               child: const Text("Back"),
             ),
-            
           ],
         ),
       ),
