@@ -66,7 +66,7 @@ class _ImageClassifierState extends State<ImageClassifier> {
     print("Hit det");
     var recognitions = await Tflite.runModelOnImage(
       path: image.path,
-      numResults: 3,
+      numResults: 1,
       threshold: 0.05,
       imageMean: 127.5,
       imageStd: 127.5,
@@ -152,7 +152,7 @@ class _ImageClassifierState extends State<ImageClassifier> {
                                         "The bird appears healthy. However, it's essential to take preventive measures to maintain the health of your flock. Ensure good hygiene practices are followed, regularly sanitize equipment, and maintain clean living conditions. Consider vaccinating the flock against common diseases, and quarantine new flock arrivals to prevent disease transmission."),
                                   ],
                                 )
-                              : results.contains("unhealthy")
+                              : results.contains("infected")
                                   ? const Column(
                                       children: [
                                         Text("Unhealthy"),
