@@ -1,2 +1,3 @@
 0 healthy
 1 infected
+2 not_recognized

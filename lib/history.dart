@@ -13,7 +13,7 @@ class _HistoryState extends ConsumerState<History> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Recent History"),
+        title: const Text("information "),
         centerTitle: true,
         backgroundColor: Colors.green,
         elevation: 0,

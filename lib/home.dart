@@ -1,6 +1,6 @@
 import 'package:fawlpox/history.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth/repository/auth_repository.dart';
@@ -8,7 +8,7 @@ import 'upload_image_screen.dart';
 
 class HomePage extends ConsumerWidget {
   final User? user;
-  const HomePage({super.key, required this.user});
+  const HomePage({Key? key, required this.user});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,7 +52,6 @@ class HomePage extends ConsumerWidget {
                 Navigator.pop(context);
               },
             ),
-
             ListTile(
               title: const Text("Information"),
               onTap: () {
@@ -64,23 +63,12 @@ class HomePage extends ConsumerWidget {
                 );
               },
             ),
-            // ListTile(
-            //   title: const Text("PAGE NAME"),
-            //   onTap: () {
-            //     Navigator.pop(context);
-            //     Navigator.of(context).push(
-            //       //TODO: Add page here
-            //       MaterialPageRoute(
-            //         builder: (context) => const (),
-            //       ),
-            //     );
-            //   },
-            // ),
           ],
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               padding: const EdgeInsets.all(10),
@@ -98,42 +86,92 @@ class HomePage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Welcome",
+                    "What is Fowlpox?",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 10,
                   ),
                   Text(
-                    "This is a Fowlpox Detection App",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Fowlpox is a viral disease in chickens caused by the avian poxvirus. It spreads through direct contact or contaminated materials, causing skin lesions or respiratory issues. Though not usually fatal, it can impact egg production and growth. Prevention involves vaccination and controlling the spread through biosecurity measures.",
+                    "Fowlpox is a slow-spreading, viral disease that affects birds of all ages. It causes white lesions that develop into wart-like nodules and then form dark scabs on birds’ combs and wattles.",
                     style: TextStyle(
                       fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 18,
+                  ),
+                  Text(
+                    "How do chickens get Fowlpox?",
+                    style: TextStyle(
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 8,
                   ),
                   Text(
-                    "This app is designed to detect fowlpox in chickens using machine learning and image processing techniques. It is a simple app that can be used by anyone to detect fowlpox in chickens. It is a simple app that can be used by anyone to detect fowlpox in chickens. It is a simple app that can be used by anyone to detect fowlpox in chickens. It is a simple app that can be used by anyone to detect fowlpox in chickens. It is a simple app that can be used by anyone to detect fowlpox in chickens. It is a simple app that can be used by anyone to detect fowlpox in chickens. It is a simple app that can be used by anyone to detect fowlpox in chickens. It is a simple app that can be used by anyone to detect fowlpox in chickens.",
+                    "The virus is transmitted by direct contact with infected birds or by indirect contact with contaminated equipment, bedding, etc. It can also be spread by several species of mosquitoes.",
                     style: TextStyle(
                       fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 17,
+                  ),
+                  Text(
+                    "Can Fowlpox be Treated?",
+                    style: TextStyle(
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
-                  )
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    "There is no treatment for fowlpox. Fortunately, bird deaths are uncommon unless the respiratory tract is severely affected.",
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 18,
+                  ),
+                  Text(
+                    "How is Fowlpox Controlled?",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    "The best way to control fowlpox is to keep it out of a flock by practicing strict biosecurity measures. Once a flock is infected, normal management and sanitation will not prevent fowlpox.",
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Center(
+                    child: Text(
+                      "Tuangamize FowlPox pamoja",
+                      style: TextStyle(
+                        fontSize: 19,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -141,7 +179,7 @@ class HomePage extends ConsumerWidget {
               height: 20,
             ),
             const Text("Press the button below to start the detection process"),
-            const SizedBox(
+            SizedBox(
               height: 30,
             ),
             Align(
@@ -166,6 +204,9 @@ class HomePage extends ConsumerWidget {
                 ),
                 child: const Text("Start Detection"),
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),

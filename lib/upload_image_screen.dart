@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tflite_v2/tflite_v2.dart';
 
 class ImageClassifier extends StatefulWidget {
-  const ImageClassifier({super.key});
+  const ImageClassifier({Key? key}) : super(key: key);
 
   @override
   State createState() => _ImageClassifierState();
@@ -47,12 +47,26 @@ class _ImageClassifierState extends State<ImageClassifier> {
     }
   }
 
+  Future<void> _captureImage() async {
+    try {
+      final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+      setState(() {
+        _image = image;
+        file = File(image!.path);
+      });
+      print("Hit pre det");
+      detectimage(file!);
+    } catch (e) {
+      print('Error capturing image: $e');
+    }
+  }
+
   Future detectimage(File image) async {
     int startTime = DateTime.now().millisecondsSinceEpoch;
     print("Hit det");
     var recognitions = await Tflite.runModelOnImage(
       path: image.path,
-      numResults: 6,
+      numResults: 3,
       threshold: 0.05,
       imageMean: 127.5,
       imageStd: 127.5,
@@ -82,7 +96,12 @@ class _ImageClassifierState extends State<ImageClassifier> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Image Classifier"),
+        backgroundColor: Colors.green,
+        centerTitle: true,
+        title: const Text(
+          "Image Classifier",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: ListView(
         children: [
@@ -120,17 +139,56 @@ class _ImageClassifierState extends State<ImageClassifier> {
                                   children: [
                                     Text("Healthy"),
                                     //Any other information for healthy goes in this column
-                                    Text("No further action required")
+                                    Text(
+                                      "Preventive Measures Advised",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                        "The bird appears healthy. However, it's essential to take preventive measures to maintain the health of your flock. Ensure good hygiene practices are followed, regularly sanitize equipment, and maintain clean living conditions. Consider vaccinating the flock against common diseases, and quarantine new flock arrivals to prevent disease transmission."),
                                   ],
                                 )
-                              : const Column(
-                                  children: [
-                                    Text("Unhealthy"),
-                                    //Any other information for unhealthy goes in this column
-                                    Text("Further action required"),
-                                    
-                                  ],
-                                ),
+                              : results.contains("unhealthy")
+                                  ? const Column(
+                                      children: [
+                                        Text("Unhealthy"),
+                                        //Any other information for unhealthy goes in this column
+                                        Text(
+                                          "Immediate attention needed",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                            "Based on the image analysis, there are possible signs of fowlpox. The first step is to identify the sick bird, quarantine it, and sample it for diagnosis. Antibiotics may be provided to the flock as a preventive measure. Additionally, ensure hygiene practices are followed, including sanitizing equipment and contacting a veterinary professional for further guidance."),
+                                      ],
+                                    )
+                                  : const Column(
+                                      children: [
+                                        Text("Not Recognized"),
+                                        //Any other information for not recognized goes in this column
+                                        Text(
+                                          "Image not recognized",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                            "The image provided could not be recognized. Please ensure the image is clear and the subject is of required input."),
+                                      ],
+                                    ),
                         ),
                       )
                     : const Offstage(),
@@ -138,11 +196,24 @@ class _ImageClassifierState extends State<ImageClassifier> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _pickImage,
-        tooltip: "Pick Image",
-        child: const Icon(Icons.image),
+      ), 
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: "pickImageFab",
+            onPressed: _pickImage,
+            tooltip: "Pick Image",
+            child: const Icon(Icons.image),
+          ),
+          SizedBox(width: 10),
+          FloatingActionButton(
+            heroTag: "captureImageFab",
+            onPressed: _captureImage,
+            tooltip: "Capture Image",
+            child: const Icon(Icons.camera),
+          ),
+        ],
       ),
     );
   }
